@@ -1,0 +1,12 @@
+{
+  "name": "image-filters",
+  "version": "1.0.0",
+  "description": "Package for image filter functions",
+  "main": "dist/index.js",
+  "author": "Bobby Yankou",
+  "license": "MIT",
+  "dependencies": {
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2"
+  }
+}
