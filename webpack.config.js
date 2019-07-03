@@ -8,12 +8,6 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
       }
     ]
   },
@@ -25,6 +19,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   node: {
+    __dirname: true,
     fs: "empty"
+  },
+  externals: {
+    fs: "require('fs')"
   }
 };
