@@ -6,12 +6,15 @@ interface IImage {
   b: number[][];
 }
 
+interface IImageBuffer extends Buffer {};
+
 const helloWorld = () => {
   console.log("Hello world.");
 };
 
 export {
   IImage,
+  IImageBuffer,
   cycle,
   helloWorld,
 };
