@@ -1,4 +1,5 @@
 import { cycle } from "./channels";
+import { getPixel } from "./pixels";
 
 interface IImage {
   r: number[][];
@@ -16,5 +17,6 @@ export {
   IImage,
   IImageBuffer,
   cycle,
+  getPixel,
   helloWorld,
 };
