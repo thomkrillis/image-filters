@@ -18,10 +18,22 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@types/jpeg-js@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@types/jpeg-js/-/jpeg-js-0.3.0.tgz#5971f0aa50900194e9565711c265c10027385e89"
+  integrity sha512-S6bajx+UpnHzh/nFgGOJ8uvDCElV+eGvljDpJKHK2FW53erZxhX+CitbUFbrsmZi1h/I+DzvGp0MWyKl3dF1yw==
+  dependencies:
+    "@types/node" "*"
+
 "@types/ndarray@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@types/ndarray/-/ndarray-1.0.7.tgz#046c4391220b61557b0779790c556018608d890d"
   integrity sha512-PdCzZlZPWB4D467RrDIz79WbthmH8miN/rY8zrlKyX0IejKtGcMUpfQTrJI8jvrazGPNmRuo+qbim1HUHSUhEQ==
+
+"@types/node@*":
+  version "12.6.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.1.tgz#d5544f6de0aae03eefbb63d5120f6c8be0691946"
+  integrity sha512-rp7La3m845mSESCgsJePNL/JQyhkOJA6G4vcwvVgkDAwHhGdq5GCumxmPjEk1MZf+8p5ZQAUE7tqgQRQTXN7uQ==
 
 "@types/node@^12.0.10":
   version "12.0.10"
@@ -1731,7 +1743,7 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
-jpeg-js@^0.3.2:
+jpeg-js@^0.3.2, jpeg-js@^0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.3.5.tgz#6fbd6cd0e49627c5a0341796c9e50c70a2aa3673"
   integrity sha512-hvaExqwmQDS8O9qnZAVDXGWU43Tbu1V0wMZmjROjT11jloSgGICZpscG+P6Nyi1BVAvyu2ARRx8qmEW30sxgdQ==

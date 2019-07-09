@@ -7,10 +7,10 @@ const getPixel = (image: ndarray, i: number, j: number) => {
   const a = image.get(i, j, 3);
 
   return {
-    r,
-    g,
-    b,
     a,
+    b,
+    g,
+    r,
   };
 };
 

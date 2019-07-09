@@ -1,4 +1,4 @@
-import { cycle } from "./channels";
+import { cycle, getRedChannel } from "./channels";
 import { getPixel } from "./pixels";
 
 interface IImage {
@@ -18,5 +18,6 @@ export {
   IImageBuffer,
   cycle,
   getPixel,
+  getRedChannel,
   helloWorld,
 };
