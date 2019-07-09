@@ -13,6 +13,7 @@ const cycle = (i: IImage) => {
 };
 
 const getChannel = (image: ndarray, c: ChannelMap) => {
+  // TODO pick does not modify .data and thus for all intent and purposes does nothing
   return image.pick(null, null, c);
 };
 

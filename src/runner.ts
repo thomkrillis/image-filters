@@ -8,6 +8,7 @@ import {
   getPixel,
   helloWorld,
 } from "./";
+import { getRedChannel } from "./channels";
 
 const getImageBufferFromNdarray = (array: ndarray): Buffer => {
   const preBufferData = array.data;
@@ -40,6 +41,10 @@ const run = async () => {
 
   const buffer = getImageBufferFromNdarray(array);
   await promisify(writeFile)(__dirname + "/assets/output-ndarray.jpg", buffer);
+
+  const redArray = getRedChannel(array);
+  const redBuffer = getImageBufferFromNdarray(redArray);
+  await promisify(writeFile)(__dirname + "/assets/output-ndarray-red.jpg", redBuffer);
 
   const fsData = await promisify(readFile)(__dirname + "/assets/sample.jpg");
   console.log("d1", fsData);
