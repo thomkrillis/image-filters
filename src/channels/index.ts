@@ -1,5 +1,6 @@
 import ndarray = require("ndarray");
 import { IImage } from "../index";
+import { copy } from "../utils/ndarray";
 
 enum ChannelMap {
   r = 0,
@@ -28,24 +29,36 @@ const unsetChannel = (image: ndarray, c: ChannelMap) => {
       channel.set(i, j, 0);
     }
   }
-  return null;
+};
+
+const unsetChannels = (image: ndarray, channels: ChannelMap[]) => {
+  for (const channel of channels) {
+    unsetChannel(image, channel);
+  }
+};
+
+const isolateBlueChannel = (image: ndarray) => {
+  const imageCopy = copy(image);
+  unsetChannels(imageCopy, [ChannelMap.r, ChannelMap.g]);
+  return imageCopy;
 };
 
 const isolateGreenChannel = (image: ndarray) => {
-  unsetChannel(image, ChannelMap.r);
-  unsetChannel(image, ChannelMap.b);
-  return image;
+  const imageCopy = copy(image);
+  unsetChannels(imageCopy, [ChannelMap.r, ChannelMap.b]);
+  return imageCopy;
 };
 
 const isolateRedChannel = (image: ndarray) => {
-  unsetChannel(image, ChannelMap.g);
-  unsetChannel(image, ChannelMap.b);
-  return image;
+  const imageCopy = copy(image);
+  unsetChannels(imageCopy, [ChannelMap.g, ChannelMap.b]);
+  return imageCopy;
 };
 
 export {
   cycle,
   cycleChannel,
+  isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
 };

@@ -1,5 +1,12 @@
-import { cycle, cycleChannel, isolateGreenChannel, isolateRedChannel } from "./channels";
+import {
+  cycleChannel,
+  isolateBlueChannel,
+  isolateGreenChannel,
+  isolateRedChannel,
+} from "./channels";
+import { stitchHorizontal } from "./compose";
 import { getPixel } from "./pixels";
+import { toBuffer } from "./utils/ndarray";
 
 interface IImage {
   r: number[][];
@@ -7,19 +14,18 @@ interface IImage {
   b: number[][];
 }
 
-interface IImageBuffer extends Buffer {};
-
 const helloWorld = () => {
   console.log("Hello world.");
 };
 
 export {
   IImage,
-  IImageBuffer,
-  cycle,
   cycleChannel,
   getPixel,
   helloWorld,
+  isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
+  stitchHorizontal,
+  toBuffer,
 };

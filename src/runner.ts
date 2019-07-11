@@ -4,17 +4,18 @@ import jpeg = require("jpeg-js");
 import ndarray = require("ndarray");
 import { promisify } from "util";
 import {
-  cycle,
   cycleChannel,
   getPixel,
   helloWorld,
+  isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
+  stitchHorizontal,
+  toBuffer,
 } from "./";
 
 const getImageBufferFromNdarray = (array: ndarray): Buffer => {
-  const preBufferData = array.data;
-  const data = Buffer.from(preBufferData as number[]);
+  const data = toBuffer(array);
   const height = array.shape[1];
   const width = array.shape[0];
   const imageData = {
@@ -28,14 +29,6 @@ const getImageBufferFromNdarray = (array: ndarray): Buffer => {
 const run = async () => {
   helloWorld();
 
-  const img = {
-    b: [],
-    g: [],
-    r: [],
-  };
-
-  cycle(img);
-
   const array = await promisify(getPixels)(__dirname + "/assets/sample.jpg");
   console.log("array", array);
   console.log("12th row, 25th column red value", array.get(11, 24, 0));
@@ -48,10 +41,17 @@ const run = async () => {
   const redBuffer = getImageBufferFromNdarray(redArray);
   await promisify(writeFile)(__dirname + "/assets/output-ndarray-red.jpg", redBuffer);
 
-  // TODO find some way to deep copy ndarray (this is black because the previous step wiped the green channel)
   const greenArray = isolateGreenChannel(array);
   const greenBuffer = getImageBufferFromNdarray(greenArray);
   await promisify(writeFile)(__dirname + "/assets/output-ndarray-green.jpg", greenBuffer);
+
+  const blueArray = isolateBlueChannel(array);
+  const blueBuffer = getImageBufferFromNdarray(blueArray);
+  await promisify(writeFile)(__dirname + "/assets/output-ndarray-blue.jpg", blueBuffer);
+
+  const horizontalArray = stitchHorizontal([redArray, greenArray, blueArray]);
+  const horizontalBuffer = getImageBufferFromNdarray(horizontalArray);
+  await promisify(writeFile)(__dirname + "/assets/output-ndarray-stitched.jpg", horizontalBuffer);
 
   const fsData = await promisify(readFile)(__dirname + "/assets/sample.jpg");
   console.log("d1", fsData);
