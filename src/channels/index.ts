@@ -8,20 +8,44 @@ enum ChannelMap {
   a = 3,
 }
 
+// Deprecated
 const cycle = (i: IImage) => {
   console.log("Cycle colour channels", i.r, i.g, i.b);
 };
 
-const getChannel = (image: ndarray, c: ChannelMap) => {
-  // TODO pick does not modify .data and thus for all intent and purposes does nothing
-  return image.pick(null, null, c);
+// TODO this is some crazy vertical stripe for some reason...
+const cycleChannel = (image: ndarray, left: boolean = true) => {
+  if (left) {
+    return image.transpose(2, 0, 1);
+  }
+  return image.transpose(1, 2, 0);
 };
 
-const getRedChannel = (image: ndarray) => {
-  return getChannel(image, ChannelMap.r);
+const unsetChannel = (image: ndarray, c: ChannelMap) => {
+  const channel = image.pick(null, null, c);
+  for (let i = 0; i < channel.shape[0]; ++i) {
+    for (let j = 0; j < channel.shape[1]; ++j) {
+      channel.set(i, j, 0);
+    }
+  }
+  return null;
+};
+
+const isolateGreenChannel = (image: ndarray) => {
+  unsetChannel(image, ChannelMap.r);
+  unsetChannel(image, ChannelMap.b);
+  return image;
+};
+
+const isolateRedChannel = (image: ndarray) => {
+  unsetChannel(image, ChannelMap.g);
+  unsetChannel(image, ChannelMap.b);
+  return image;
 };
 
 export {
   cycle,
-  getRedChannel,
+  cycleChannel,
+  isolateGreenChannel,
+  isolateRedChannel,
 };

@@ -5,10 +5,12 @@ import ndarray = require("ndarray");
 import { promisify } from "util";
 import {
   cycle,
+  cycleChannel,
   getPixel,
   helloWorld,
+  isolateGreenChannel,
+  isolateRedChannel,
 } from "./";
-import { getRedChannel } from "./channels";
 
 const getImageBufferFromNdarray = (array: ndarray): Buffer => {
   const preBufferData = array.data;
@@ -42,9 +44,14 @@ const run = async () => {
   const buffer = getImageBufferFromNdarray(array);
   await promisify(writeFile)(__dirname + "/assets/output-ndarray.jpg", buffer);
 
-  const redArray = getRedChannel(array);
+  const redArray = isolateRedChannel(array);
   const redBuffer = getImageBufferFromNdarray(redArray);
   await promisify(writeFile)(__dirname + "/assets/output-ndarray-red.jpg", redBuffer);
+
+  // TODO find some way to deep copy ndarray (this is black because the previous step wiped the green channel)
+  const greenArray = isolateGreenChannel(array);
+  const greenBuffer = getImageBufferFromNdarray(greenArray);
+  await promisify(writeFile)(__dirname + "/assets/output-ndarray-green.jpg", greenBuffer);
 
   const fsData = await promisify(readFile)(__dirname + "/assets/sample.jpg");
   console.log("d1", fsData);
