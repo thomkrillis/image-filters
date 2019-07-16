@@ -18,8 +18,10 @@ const stitchHorizontal = (images: ndarray[]): ndarray => {
   }
   for (let h0 = 0; h0 < h; h0++) {
     bufferImages.forEach((image, index) => {
-      const width = images[index].shape[0];
-      bufferArray.push(image.subarray(h0 * width, (4 * (h0 + 1) * width) - 3));
+      // 4-factor because of RGBA
+      const fourWidth = 4 * images[index].shape[0];
+      // Push one row at a time of each image
+      bufferArray.push(image.subarray(h0 * fourWidth, (h0 + 1) * fourWidth));
     });
   }
   const buffer: Buffer = Buffer.concat(bufferArray);
