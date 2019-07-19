@@ -11,6 +11,7 @@ import {
   isolateGreenChannel,
   isolateRedChannel,
   stitchHorizontal,
+  sum,
   toBuffer,
 } from "./";
 
@@ -49,9 +50,19 @@ const run = async () => {
   const blueBuffer = getImageBufferFromNdarray(blueArray);
   await promisify(writeFile)(__dirname + "/assets/output-ndarray-blue.jpg", blueBuffer);
 
+  const sumArray = sum([redArray, greenArray, blueArray]);
+  const sumBuffer = getImageBufferFromNdarray(sumArray);
+  await promisify(writeFile)(__dirname + "/assets/output-ndarray-sum.jpg", sumBuffer);
+
   const horizontalArray = stitchHorizontal([redArray, greenArray, blueArray]);
   const horizontalBuffer = getImageBufferFromNdarray(horizontalArray);
   await promisify(writeFile)(__dirname + "/assets/output-ndarray-stitched.jpg", horizontalBuffer);
+
+  /*
+  const cycleArray = cycleChannel(array);
+  const cycleBuffer = getImageBufferFromNdarray(cycleArray);
+  await promisify(writeFile)(__dirname + "/assets/output-ndarray-cycle.jpg", cycleBuffer);
+  */
 
   const fsData = await promisify(readFile)(__dirname + "/assets/sample.jpg");
   console.log("d1", fsData);

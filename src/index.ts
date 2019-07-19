@@ -4,7 +4,7 @@ import {
   isolateGreenChannel,
   isolateRedChannel,
 } from "./channels";
-import { stitchHorizontal } from "./compose";
+import { stitchHorizontal, sum } from "./compose";
 import { getPixel } from "./pixels";
 import { toBuffer } from "./utils/ndarray";
 
@@ -27,5 +27,6 @@ export {
   isolateGreenChannel,
   isolateRedChannel,
   stitchHorizontal,
+  sum,
   toBuffer,
 };
