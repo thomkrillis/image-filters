@@ -14,6 +14,7 @@ import {
   sum,
   toBuffer,
 } from "./";
+import { newCycle } from "./channels";
 
 const getImageBufferFromNdarray = (array: ndarray): Buffer => {
   const data = toBuffer(array);
@@ -53,6 +54,10 @@ const run = async () => {
   const sumArray = sum([redArray, greenArray, blueArray]);
   const sumBuffer = getImageBufferFromNdarray(sumArray);
   await promisify(writeFile)(__dirname + "/../assets/output-ndarray-sum.jpg", sumBuffer);
+
+  const cycleArray = newCycle(array, false);
+  const cycleBuffer = getImageBufferFromNdarray(cycleArray);
+  await promisify(writeFile)(__dirname + "/../assets/output-cycle.jpg", cycleBuffer);
 
   const horizontalArray = stitchHorizontal([redArray, greenArray, blueArray]);
   const horizontalBuffer = getImageBufferFromNdarray(horizontalArray);

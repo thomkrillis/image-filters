@@ -3,6 +3,7 @@ import {
   isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
+  newCycle,
 } from "./channels";
 import { stitchHorizontal, sum } from "./compose";
 import { getPixel } from "./pixels";
@@ -26,6 +27,7 @@ export {
   isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
+  newCycle,
   stitchHorizontal,
   sum,
   toBuffer,
