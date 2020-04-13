@@ -30,44 +30,44 @@ const getImageBufferFromNdarray = (array: ndarray): Buffer => {
 const run = async () => {
   helloWorld();
 
-  const array = await promisify(getPixels)(__dirname + "/assets/sample.jpg");
+  const array = await promisify(getPixels)(__dirname + "/../assets/sample.jpg");
   console.log("array", array);
   console.log("12th row, 25th column red value", array.get(11, 24, 0));
   console.log("12th row, 25th column rgba values", getPixel(array, 11, 24));
 
   const buffer = getImageBufferFromNdarray(array);
-  await promisify(writeFile)(__dirname + "/assets/output-ndarray.jpg", buffer);
+  await promisify(writeFile)(__dirname + "/../assets/output-ndarray.jpg", buffer);
 
   const redArray = isolateRedChannel(array);
   const redBuffer = getImageBufferFromNdarray(redArray);
-  await promisify(writeFile)(__dirname + "/assets/output-ndarray-red.jpg", redBuffer);
+  await promisify(writeFile)(__dirname + "/../assets/output-ndarray-red.jpg", redBuffer);
 
   const greenArray = isolateGreenChannel(array);
   const greenBuffer = getImageBufferFromNdarray(greenArray);
-  await promisify(writeFile)(__dirname + "/assets/output-ndarray-green.jpg", greenBuffer);
+  await promisify(writeFile)(__dirname + "/../assets/output-ndarray-green.jpg", greenBuffer);
 
   const blueArray = isolateBlueChannel(array);
   const blueBuffer = getImageBufferFromNdarray(blueArray);
-  await promisify(writeFile)(__dirname + "/assets/output-ndarray-blue.jpg", blueBuffer);
+  await promisify(writeFile)(__dirname + "/../assets/output-ndarray-blue.jpg", blueBuffer);
 
   const sumArray = sum([redArray, greenArray, blueArray]);
   const sumBuffer = getImageBufferFromNdarray(sumArray);
-  await promisify(writeFile)(__dirname + "/assets/output-ndarray-sum.jpg", sumBuffer);
+  await promisify(writeFile)(__dirname + "/../assets/output-ndarray-sum.jpg", sumBuffer);
 
   const horizontalArray = stitchHorizontal([redArray, greenArray, blueArray]);
   const horizontalBuffer = getImageBufferFromNdarray(horizontalArray);
-  await promisify(writeFile)(__dirname + "/assets/output-ndarray-stitched.jpg", horizontalBuffer);
+  await promisify(writeFile)(__dirname + "/../assets/output-ndarray-stitched.jpg", horizontalBuffer);
 
   /*
   const cycleArray = cycleChannel(array);
   const cycleBuffer = getImageBufferFromNdarray(cycleArray);
-  await promisify(writeFile)(__dirname + "/assets/output-ndarray-cycle.jpg", cycleBuffer);
+  await promisify(writeFile)(__dirname + "/../assets/output-ndarray-cycle.jpg", cycleBuffer);
   */
 
-  const fsData = await promisify(readFile)(__dirname + "/assets/sample.jpg");
+  const fsData = await promisify(readFile)(__dirname + "/../assets/sample.jpg");
   console.log("d1", fsData);
 
-  await promisify(writeFile)(__dirname + "/assets/output.jpg", fsData);
+  await promisify(writeFile)(__dirname + "/../assets/output.jpg", fsData);
 
   return null;
 };

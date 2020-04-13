@@ -6,5 +6,7 @@ declare module "get-pixels" {
     ( error: Error | null, result: ndarray) : void;
   }
 
-  export = function getPixels(url: string, callback: Callback): void;
+  function getPixels(url: string, callback: Callback): void;
+
+  export = getPixels;
 }
