@@ -1,5 +1,4 @@
 import {
-  cycleChannel,
   isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
@@ -7,6 +6,7 @@ import {
 } from "./channels";
 import { stitchHorizontal, sum } from "./compose";
 import { getPixel } from "./pixels";
+import { unsetPixels } from "./unset";
 import { toBuffer } from "./utils/ndarray";
 
 interface IImage {
@@ -21,7 +21,6 @@ const helloWorld = () => {
 
 export {
   IImage,
-  cycleChannel,
   getPixel,
   helloWorld,
   isolateBlueChannel,
@@ -31,4 +30,5 @@ export {
   stitchHorizontal,
   sum,
   toBuffer,
+  unsetPixels,
 };

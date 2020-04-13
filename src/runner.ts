@@ -4,17 +4,17 @@ import jpeg = require("jpeg-js");
 import ndarray = require("ndarray");
 import { promisify } from "util";
 import {
-  cycleChannel,
   getPixel,
   helloWorld,
   isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
+  newCycle,
   stitchHorizontal,
   sum,
   toBuffer,
+  unsetPixels,
 } from "./";
-import { newCycle } from "./channels";
 
 const getImageBufferFromNdarray = (array: ndarray): Buffer => {
   const data = toBuffer(array);
@@ -29,6 +29,14 @@ const getImageBufferFromNdarray = (array: ndarray): Buffer => {
 };
 
 const run = async () => {
+  const image = await promisify(getPixels)(__dirname + "/../assets/sample.jpg");
+  const alteredImage = unsetPixels(image);
+  const imageBuffer = getImageBufferFromNdarray(alteredImage);
+  await promisify(writeFile)(__dirname + "/../assets/output-run.jpg", imageBuffer);
+  return null;
+};
+
+const runAll = async () => {
   helloWorld();
 
   const array = await promisify(getPixels)(__dirname + "/../assets/sample.jpg");

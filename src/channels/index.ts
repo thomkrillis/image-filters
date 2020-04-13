@@ -14,6 +14,14 @@ const cycle = (i: IImage) => {
   console.log("Cycle colour channels", i.r, i.g, i.b);
 };
 
+// TODO this is some crazy vertical stripe for some reason...
+const cycleChannel = (image: ndarray, left: boolean = true) => {
+  if (left) {
+    return image.transpose(2, 0, 1);
+  }
+  return image.transpose(1, 2, 0);
+};
+
 const newCycle = (image: ndarray, right: boolean = true): ndarray => {
   const [red, green, blue, alpha] = getChannelBuffersFromArray(image);
   const newOrder: Buffer[] = right
@@ -54,14 +62,6 @@ const getNdArrayFromChannelBuffers = (buffers: Buffer[], width: number, height: 
   return ndarray(outBuffer, [width, height, stride]);
 };
 
-// TODO this is some crazy vertical stripe for some reason...
-const cycleChannel = (image: ndarray, left: boolean = true) => {
-  if (left) {
-    return image.transpose(2, 0, 1);
-  }
-  return image.transpose(1, 2, 0);
-};
-
 const unsetChannel = (image: ndarray, c: ChannelMap) => {
   const channel = image.pick(null, null, c);
   for (let i = 0; i < channel.shape[0]; ++i) {
@@ -96,8 +96,6 @@ const isolateRedChannel = (image: ndarray) => {
 };
 
 export {
-  cycle,
-  cycleChannel,
   isolateBlueChannel,
   isolateGreenChannel,
   isolateRedChannel,
